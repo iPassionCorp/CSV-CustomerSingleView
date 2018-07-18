@@ -4,17 +4,92 @@ Resource          ../../keywords/edm.txt
 Resource          ../../Repositories/${env}/${dbname}_${env}_Connection.txt
 
 *** Test Cases ***
-EDM4_SIT_[CF]_0001_0001_Validate compensateID_Length
+CSV_SIT_0001_0001_Validate PartyID_length
     EDM_Connect_DB
-    @{Result}    Query    SELECT count (0) FROM dm.cert cert INNER JOIN dm."name" name ON name.nameid = cert.nameid INNER JOIN dm.person person ON person.personid = name.personid INNER JOIN dm.compensateid com ON com.referenceid = person.referenceid INNER JOIN dm.tlpmigration mig ON cert.policyno = mig.migrateplancode AND cert.certno = mig.tlipolicyno where length(com.compensateid) > 13;
-    EDM_Compare Result    @{Result[0]}    0    compensateID
+    @{Result}    Query
+    EDM_Compare Result    @{Result[0]}    0    party_id
 
-EDM4_SIT_[CF]_0001_0002_Validate compensateID_Validate compensateID_Duplicate
+CSV_SIT_0001_0002_Validate PartyID_NotNull
     EDM_Connect_DB
-    @{Result}    Query    SELECT count (0) FROM (SELECT count (0) FROM dm.compensateid GROUP BY compensateid HAVING count(compensateid) > 1) tmp
-    EDM_Compare Result    @{Result[0]}    0    compensateID
+    @{Result}    Query
+    EDM_Compare Result    @{Result[0]}    0    party_id
 
-EDM4_SIT_[CF]_0001_0003_Validate referenceID_Length
+CSV_SIT_0001_0003_Validate PartyType_Default
     EDM_Connect_DB
-    @{Result}    Query    SELECT count (0) FROM dm.cert cert INNER JOIN dm."name" name ON name.nameid = cert.nameid INNER JOIN dm.person person ON person.personid = name.personid INNER JOIN dm.compensateid com ON com.referenceid = person.referenceid INNER JOIN dm.tlpmigration mig ON cert.policyno = mig.migrateplancode AND cert.certno = mig.tlipolicyno WHERE length(com.referenceid) > 13;
-    EDM_Compare Result    @{Result[0]}    0    referenceID
+    @{Result}    Query
+    EDM_Compare Result    @{Result[0]}    0    party_type
+
+CSV_SIT_0001_0004_Validate PartyType_NotNull
+    EDM_Connect_DB
+    @{Result}    Query
+    EDM_Compare Result    @{Result[0]}    0    party_type
+
+CSV_SIT_0001_0005_Validate FullNameTH_Default
+    EDM_Connect_DB
+    @{Result}    Query
+    EDM_Compare Result    @{Result[0]}    0    full_name_th
+
+CSV_SIT_0001_0006_Validate FullNameTH_NotNull
+    EDM_Connect_DB
+    @{Result}    Query
+    EDM_Compare Result    @{Result[0]}    0    full_name_th
+
+CSV_SIT_0001_0007_Validate FullNameEN_Default
+    EDM_Connect_DB
+    @{Result}    Query
+    EDM_Compare Result    @{Result[0]}    0    full_name_en
+
+CSV_SIT_0001_0008_Validate FullNameEN_NotNull
+    EDM_Connect_DB
+    @{Result}    Query
+    EDM_Compare Result    @{Result[0]}    0    full_name_en
+
+CSV_SIT_0001_0009_Validate IssuesCountry_length
+    EDM_Connect_DB
+    @{Result}    Query
+    EDM_Compare Result    @{Result[0]}    0    issues_country
+
+CSV_SIT_0001_0010_Validate IssuesCountry_NotNull
+    EDM_Connect_DB
+    @{Result}    Query
+    EDM_Compare Result    @{Result[0]}    0    issues_country
+
+CSV_SIT_0001_0011_Validate GovtID_length
+    EDM_Connect_DB
+    @{Result}    Query
+    EDM_Compare Result    @{Result[0]}    0    govt_id
+
+CSV_SIT_0001_0012_Validate GovtID_NotNull
+    EDM_Connect_DB
+    @{Result}    Query
+    EDM_Compare Result    @{Result[0]}    0    govt_id
+
+CSV_SIT_0001_0013_Validate GovtIDType_Default
+    EDM_Connect_DB
+    @{Result}    Query
+    EDM_Compare Result    @{Result[0]}    0    govt_id_type
+
+CSV_SIT_0001_0014_Validate GovtIDType_NotNull
+    EDM_Connect_DB
+    @{Result}    Query
+    EDM_Compare Result    @{Result[0]}    0    govt_id_type
+
+CSV_SIT_0001_0015_Validate SystemID_length
+    EDM_Connect_DB
+    @{Result}    Query
+    EDM_Compare Result    @{Result[0]}    0    system_id
+
+CSV_SIT_0001_0016_Validate SystemID_NotNull
+    EDM_Connect_DB
+    @{Result}    Query
+    EDM_Compare Result    @{Result[0]}    0    system_id
+
+CSV_SIT_0001_0017_Validate SystemKey_length
+    EDM_Connect_DB
+    @{Result}    Query
+    EDM_Compare Result    @{Result[0]}    0    system_key
+
+CSV_SIT_0001_0018_Validate SystemKey_NotNull
+    EDM_Connect_DB
+    @{Result}    Query
+    EDM_Compare Result    @{Result[0]}    0    system_key

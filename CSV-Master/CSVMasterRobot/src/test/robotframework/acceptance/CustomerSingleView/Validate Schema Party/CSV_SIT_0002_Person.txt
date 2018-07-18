@@ -4,17 +4,42 @@ Resource          ../../keywords/edm.txt
 Resource          ../../Repositories/${env}/${dbname}_${env}_Connection.txt
 
 *** Test Cases ***
-EDM4_SIT_[CF]_0001_0001_Validate compensateID_Length
+CSV_SIT_0001_0001_Validate PersonID_length
     EDM_Connect_DB
-    @{Result}    Query    SELECT count (0) FROM dm.cert cert INNER JOIN dm."name" name ON name.nameid = cert.nameid INNER JOIN dm.person person ON person.personid = name.personid INNER JOIN dm.compensateid com ON com.referenceid = person.referenceid INNER JOIN dm.tlpmigration mig ON cert.policyno = mig.migrateplancode AND cert.certno = mig.tlipolicyno where length(com.compensateid) > 13;
-    EDM_Compare Result    @{Result[0]}    0    compensateID
+    @{Result}    Query
+    EDM_Compare Result    @{Result[0]}    0    person_id
 
-EDM4_SIT_[CF]_0001_0002_Validate compensateID_Validate compensateID_Duplicate
+CSV_SIT_0001_0002_Validate PersonID_NotNull
     EDM_Connect_DB
-    @{Result}    Query    SELECT count (0) FROM (SELECT count (0) FROM dm.compensateid GROUP BY compensateid HAVING count(compensateid) > 1) tmp
-    EDM_Compare Result    @{Result[0]}    0    compensateID
+    @{Result}    Query
+    EDM_Compare Result    @{Result[0]}    0    person_id
 
-EDM4_SIT_[CF]_0001_0003_Validate referenceID_Length
+CSV_SIT_0001_0003_Validate PartyID_length
     EDM_Connect_DB
-    @{Result}    Query    SELECT count (0) FROM dm.cert cert INNER JOIN dm."name" name ON name.nameid = cert.nameid INNER JOIN dm.person person ON person.personid = name.personid INNER JOIN dm.compensateid com ON com.referenceid = person.referenceid INNER JOIN dm.tlpmigration mig ON cert.policyno = mig.migrateplancode AND cert.certno = mig.tlipolicyno WHERE length(com.referenceid) > 13;
-    EDM_Compare Result    @{Result[0]}    0    referenceID
+    @{Result}    Query
+    EDM_Compare Result    @{Result[0]}    0    Party_id
+
+CSV_SIT_0001_0004_Validate PartyID_NotNull
+    EDM_Connect_DB
+    @{Result}    Query
+    EDM_Compare Result    @{Result[0]}    0    Party_id
+
+CSV_SIT_0001_0005_Validate PnameTH_Default
+    EDM_Connect_DB
+    @{Result}    Query
+    EDM_Compare Result    @{Result[0]}    0    pname_th
+
+CSV_SIT_0001_0006_Validate PnameTH_NotNull
+    EDM_Connect_DB
+    @{Result}    Query
+    EDM_Compare Result    @{Result[0]}    0    pname_th
+
+CSV_SIT_0001_0007_Validate FnameTH_Default
+    EDM_Connect_DB
+    @{Result}    Query
+    EDM_Compare Result    @{Result[0]}    0    fname_th
+
+CSV_SIT_0001_0008 Validate FnameTH_Notnull
+    EDM_Connect_DB
+    @{Result}    Query
+    EDM_Compare Result    @{Result[0]}    0    fname_th
